@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout :: layout(~{::title}, ~{::div#page-content})}">
+<head>
+    <title>Thêm môn học</title>
+</head>
+<body>
+<div id="page-content">
+    <h2>Thêm môn học mới</h2>
+    <form th:action="@{/monhoc/add}" th:object="${monHoc}" method="post">
+        <div class="mb-3">
+            <label class="form-label">Mã môn</label>
+            <input type="text" class="form-control" th:field="*{maMon}" required>
+            <div class="text-danger" th:if="${#fields.hasErrors('maMon')}" th:errors="*{maMon}"></div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Tên môn học</label>
+            <input type="text" class="form-control" th:field="*{tenMonHoc}" required>
+            <div class="text-danger" th:if="${#fields.hasErrors('tenMonHoc')}" th:errors="*{tenMonHoc}"></div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Mô tả</label>
+            <textarea class="form-control" th:field="*{moTa}" rows="3" placeholder="Nhập mô tả môn học"></textarea>
+            <div class="text-danger" th:if="${#fields.hasErrors('moTa')}" th:errors="*{moTa}"></div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Số lượng đăng ký tối đa</label>
+            <input type="number" min="1" class="form-control" th:field="*{soLuongDangKy}" required>
+            <div class="text-danger" th:if="${#fields.hasErrors('soLuongDangKy')}" th:errors="*{soLuongDangKy}"></div>
+        </div>
+        <button type="submit" class="btn btn-primary">Lưu</button>
+        <a th:href="@{/monhoc}" class="btn btn-secondary">Hủy</a>
+    </form>
+</div>
+</body>
+</html>

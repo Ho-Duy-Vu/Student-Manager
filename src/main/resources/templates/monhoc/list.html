@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout :: layout(~{::title}, ~{::div#page-content})}">
+<head>
+    <title>Danh sách môn học</title>
+</head>
+<body>
+<div id="page-content">
+    <h2>Danh sách môn học</h2>
+    <a th:href="@{/monhoc/add}" class="btn btn-success mb-3">Thêm mới</a>
+    <table class="table table-bordered">
+        <thead class="table-light">
+            <tr>
+                <th>Mã môn</th>
+                <th>Tên môn học</th>
+                <th>Mô tả</th>
+                <th>Số lượng đăng ký</th>
+                <th>Chức năng</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="mh : ${dsMonHoc}">
+                <td th:text="${mh.maMon}"></td>
+                <td th:text="${mh.tenMonHoc}"></td>
+                <td th:text="${mh.moTa ?: 'Chưa có mô tả'}"></td>
+                <td>
+                    <span th:text="${mh.soLuongDaDangKy}"></span>
+                    /
+                    <span th:text="${mh.soLuongDangKy}"></span>
+                </td>
+                <td>
+                    <a th:href="@{/monhoc/edit/{id}(id=${mh.maMon})}">Sửa</a>
+                    |
+                    <a th:href="@{/monhoc/delete/{id}(id=${mh.maMon})}"
+                       onclick="return confirm('Bạn có chắc muốn xoá?')">Xoá</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

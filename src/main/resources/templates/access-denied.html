@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout :: layout(~{::title}, ~{::div#page-content})}">
+<head>
+    <title>Truy cập bị từ chối</title>
+</head>
+<body>
+<div id="page-content">
+    <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">⛔ Truy cập bị từ chối</h4>
+        <p>Bạn không có quyền truy cập trang này. Vui lòng liên hệ quản trị viên nếu có thắc mắc.</p>
+        <hr/>
+        <a href="/" class="btn btn-primary">Quay lại trang chủ</a>
+    </div>
+</div>
+</body>
+</html>

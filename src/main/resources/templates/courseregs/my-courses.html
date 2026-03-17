@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout :: layout(~{::title}, ~{::div#page-content})}">
+<head>
+    <title>Môn học đã đăng ký</title>
+</head>
+<body>
+<div id="page-content">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Môn học đã đăng ký</h2>
+        <a th:href="@{/courseregs}" class="btn btn-outline-primary">Đăng ký thêm</a>
+    </div>
+
+    <div th:if="${successMessage}" class="alert alert-success" th:text="${successMessage}"></div>
+
+    <div th:if="${registeredCourses == null || #lists.isEmpty(registeredCourses)}" class="alert alert-info">
+        Bạn chưa đăng ký môn học nào.
+    </div>
+
+    <table th:if="${registeredCourses != null && !#lists.isEmpty(registeredCourses)}" class="table table-bordered table-striped align-middle">
+        <thead class="table-dark">
+        <tr>
+            <th>Mã môn</th>
+            <th>Tên môn học</th>
+            <th>Mô tả</th>
+            <th>Số lượng</th>
+            <th>Thao tác</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="course : ${registeredCourses}">
+            <td th:text="${course.maMon}"></td>
+            <td th:text="${course.tenMonHoc}"></td>
+            <td th:text="${course.moTa ?: 'Chưa có mô tả'}"></td>
+            <td>
+                <span th:text="${course.soLuongDaDangKy}"></span>
+                /
+                <span th:text="${course.soLuongDangKy}"></span>
+            </td>
+            <td>
+                <form th:action="@{/courseregs/unregister/{maMon}(maMon=${course.maMon})}" method="post"
+                      onsubmit="return confirm('Hủy đăng ký môn này?');">
+                    <button type="submit" class="btn btn-danger btn-sm">Hủy đăng ký</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

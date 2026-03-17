@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout :: layout(~{::title}, ~{::div#page-content})}">
+<head>
+    <title>Sửa lớp</title>
+</head>
+<body>
+<div id="page-content">
+    <h2>Sửa lớp</h2>
+    <form th:action="@{/lop/edit/{id}(id=${lop.maLop})}" th:object="${lop}" method="post">
+        <div class="mb-3">
+            <label class="form-label">Mã lớp</label>
+            <input type="text" class="form-control" th:field="*{maLop}" readonly>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Tên lớp</label>
+            <input type="text" class="form-control" th:field="*{tenLop}" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Cập nhật</button>
+        <a th:href="@{/lop}" class="btn btn-secondary">Hủy</a>
+    </form>
+</div>
+</body>
+</html>

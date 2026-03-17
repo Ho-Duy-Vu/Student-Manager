@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout :: layout(~{::title}, ~{::div#page-content})}">
+<head>
+    <title>Trang chủ - Sinh viên</title>
+</head>
+<body>
+<div id="page-content">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h5>Thông tin cá nhân</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>MSSV:</strong> <span th:text="${sinhVien.mssv}"></span></p>
+                    <p><strong>Họ tên:</strong> <span th:text="${sinhVien.hoTen}"></span></p>
+                    <p><strong>Email:</strong> <span th:text="${sinhVien.email ?: 'Chưa cập nhật'}"></span></p>
+                    <p><strong>Ngày sinh:</strong> <span th:text="${sinhVien.ngaySinh != null ? #dates.format(sinhVien.ngaySinh, 'dd/MM/yyyy') : 'Chưa cập nhật'}"></span></p>
+                    <p><strong>Lớp:</strong> <span th:text="${sinhVien.lop?.tenLop ?: 'Chưa chọn'}"></span></p>
+                    <a th:href="@{/sinhvien/edit/{id}(id=${sinhVien.mssv})}" class="btn btn-primary btn-sm">
+                        Cập nhật hồ sơ
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h5>Quản lý môn học</h5>
+                </div>
+                <div class="card-body">
+                    <p>Bạn có thể đăng ký môn học theo lịch trình do nhà trường công bố.</p>
+                    <a th:href="@{/courseregs}" class="btn btn-success me-2">Đăng ký môn học</a>
+                    <a th:href="@{/courseregs/my-courses}" class="btn btn-info">Xem môn đã đăng ký</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

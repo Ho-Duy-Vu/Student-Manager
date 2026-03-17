@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout :: layout(~{::title}, ~{::div#page-content})}">
+<head>
+    <title>Thêm lớp</title>
+</head>
+<body>
+<div id="page-content">
+    <h2>Thêm lớp mới</h2>
+    <form th:action="@{/lop/add}" th:object="${lop}" method="post">
+        <div class="mb-3">
+            <label class="form-label">Tên lớp</label>
+            <input type="text" class="form-control" th:field="*{tenLop}" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Lưu</button>
+        <a th:href="@{/lop}" class="btn btn-secondary">Hủy</a>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout :: layout(~{::title}, ~{::div#page-content})}">
+<head>
+    <title>Sửa sinh viên</title>
+</head>
+<body>
+<div id="page-content">
+    <h2>Sửa sinh viên</h2>
+
+    <div th:if="${incompleteMsg}" class="alert alert-info alert-dismissible fade show" role="alert">
+        <i class="bi bi-info-circle-fill me-1"></i>
+        <span th:text="${incompleteMsg}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <form th:action="@{/sinhvien/edit/{id}(id=${sinhVien.mssv})}" th:object="${sinhVien}" method="post">
+        <div class="mb-3">
+            <label class="form-label">MSSV</label>
+            <input type="text" class="form-control" th:field="*{mssv}" readonly>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Họ tên</label>
+            <input type="text" class="form-control" th:field="*{hoTen}" required>
+            <div class="text-danger" th:if="${#fields.hasErrors('hoTen')}" th:errors="*{hoTen}"></div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Ngày sinh</label>
+            <input type="date" class="form-control" th:field="*{ngaySinh}" max="9999-12-31">
+            <div class="text-danger" th:if="${#fields.hasErrors('ngaySinh')}" th:errors="*{ngaySinh}"></div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control" th:field="*{email}" required>
+            <div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Lớp</label>
+            <select class="form-select" name="maLop">
+                <option value="">-- Chọn lớp --</option>
+                <option th:each="lop : ${dsLop}"
+                        th:value="${lop.maLop}"
+                        th:text="${lop.tenLop}"
+                        th:selected="${sinhVien.lop != null && sinhVien.lop.maLop == lop.maLop}"></option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Cập nhật</button>
+        <a th:href="@{/sinhvien}" class="btn btn-secondary">Hủy</a>
+    </form>
+</div>
+</body>
+</html>

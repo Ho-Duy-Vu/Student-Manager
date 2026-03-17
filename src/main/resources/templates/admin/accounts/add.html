@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout :: layout(~{::title}, ~{::div#page-content})}">
+<head>
+    <title>Tạo tài khoản</title>
+</head>
+<body>
+<div id="page-content">
+    <h2>Tạo tài khoản mới</h2>
+    <form th:action="@{/admin/accounts/add}" th:object="${account}" method="post" class="mt-3">
+        <div class="mb-3">
+            <label class="form-label">MSSV</label>
+            <input type="text" class="form-control" th:field="*{mssv}" placeholder="Nhập MSSV 10 chữ số">
+            <div class="text-danger" th:if="${#fields.hasErrors('mssv')}" th:errors="*{mssv}"></div>
+            <div class="text-danger" th:if="${errorMssv}" th:text="${errorMssv}"></div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Họ tên</label>
+            <input type="text" class="form-control" th:field="*{hoTen}" placeholder="Nhập họ tên">
+            <div class="text-danger" th:if="${#fields.hasErrors('hoTen')}" th:errors="*{hoTen}"></div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Mật khẩu</label>
+            <input type="password" class="form-control" name="matKhauRaw" placeholder="Ít nhất 6 ký tự">
+            <div class="text-danger" th:if="${errorMatKhau}" th:text="${errorMatKhau}"></div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Vai trò</label>
+            <select class="form-select" th:field="*{role}">
+                <option value="ROLE_USER">USER</option>
+                <option value="ROLE_ADMIN">ADMIN</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Tạo tài khoản</button>
+        <a th:href="@{/admin/accounts}" class="btn btn-secondary">Quay lại</a>
+    </form>
+</div>
+</body>
+</html>

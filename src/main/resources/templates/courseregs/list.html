@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout :: layout(~{::title}, ~{::div#page-content})}">
+<head>
+    <title>Đăng ký môn học</title>
+</head>
+<body>
+<div id="page-content">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Đăng ký môn học</h2>
+        <a th:href="@{/courseregs/my-courses}" class="btn btn-outline-primary">Môn đã đăng ký</a>
+    </div>
+
+    <div th:if="${successMessage}" class="alert alert-success" th:text="${successMessage}"></div>
+    <div th:if="${errorMessage}" class="alert alert-danger" th:text="${errorMessage}"></div>
+
+    <table class="table table-bordered table-striped align-middle">
+        <thead class="table-dark">
+        <tr>
+            <th>Mã môn</th>
+            <th>Tên môn học</th>
+            <th>Mô tả</th>
+            <th>Số lượng</th>
+            <th>Trạng thái</th>
+            <th>Thao tác</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="course : ${allCourses}">
+            <td th:text="${course.maMon}"></td>
+            <td th:text="${course.tenMonHoc}"></td>
+            <td th:text="${course.moTa ?: 'Chưa có mô tả'}"></td>
+            <td>
+                <span th:text="${course.soLuongDaDangKy}"></span>
+                /
+                <span th:text="${course.soLuongDangKy}"></span>
+            </td>
+            <td>
+                <span th:if="${registeredCourseIds.contains(course.maMon)}" class="badge bg-success">Đã đăng ký</span>
+                <span th:if="${!registeredCourseIds.contains(course.maMon) and !course.conCho}" class="badge bg-danger">Đã đầy</span>
+                <span th:unless="${registeredCourseIds.contains(course.maMon)}" class="badge bg-secondary">Chưa đăng ký</span>
+            </td>
+            <td>
+                <form th:if="${!registeredCourseIds.contains(course.maMon) and course.conCho}"
+                      th:action="@{/courseregs/register/{maMon}(maMon=${course.maMon})}" method="post">
+                    <button type="submit" class="btn btn-primary btn-sm">Đăng ký</button>
+                </form>
+                <span th:if="${registeredCourseIds.contains(course.maMon)}" class="text-muted">Đã đăng ký</span>
+                <span th:if="${!registeredCourseIds.contains(course.maMon) and !course.conCho}" class="text-muted">Hết chỗ</span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

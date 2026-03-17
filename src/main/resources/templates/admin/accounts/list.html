@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout :: layout(~{::title}, ~{::div#page-content})}">
+<head>
+    <title>Quản lý tài khoản</title>
+</head>
+<body>
+<div id="page-content">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Quản lý tài khoản và phân quyền</h2>
+        <a th:href="@{/admin/accounts/add}" class="btn btn-primary">Tạo tài khoản</a>
+    </div>
+
+    <table class="table table-bordered table-striped align-middle">
+        <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>MSSV</th>
+            <th>Họ tên</th>
+            <th>Vai trò</th>
+            <th>Mật khẩu</th>
+            <th>Thao tác</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="account : ${accounts}">
+            <td th:text="${account.id}"></td>
+            <td th:text="${account.mssv}"></td>
+            <td th:text="${account.hoTen}"></td>
+            <td>
+                <form th:action="@{/admin/accounts/role/{id}(id=${account.id})}" method="post" class="d-flex gap-2">
+                    <select name="role" class="form-select form-select-sm">
+                        <option value="ROLE_USER" th:selected="${account.role == 'ROLE_USER'}">USER</option>
+                        <option value="ROLE_ADMIN" th:selected="${account.role == 'ROLE_ADMIN'}">ADMIN</option>
+                    </select>
+                    <button type="submit" class="btn btn-warning btn-sm">Lưu</button>
+                </form>
+            </td>
+            <td>
+                <form th:action="@{/admin/accounts/password/{id}(id=${account.id})}" method="post" class="d-flex gap-2">
+                    <input type="password" name="newPassword" class="form-control form-control-sm" placeholder="Mật khẩu mới">
+                    <button type="submit" class="btn btn-secondary btn-sm">Đổi</button>
+                </form>
+                <div class="text-danger small mt-1" th:if="${passwordAccountId == account.id && errorPassword}" th:text="${errorPassword}"></div>
+            </td>
+            <td>
+                <a th:href="@{/admin/accounts/edit/{id}(id=${account.id})}" class="btn btn-primary btn-sm me-2">Sửa</a>
+                <form th:action="@{/admin/accounts/delete/{id}(id=${account.id})}" method="post"
+                      onsubmit="return confirm('Xóa tài khoản này?');" class="d-inline">
+                    <button type="submit" class="btn btn-danger btn-sm">Xóa</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

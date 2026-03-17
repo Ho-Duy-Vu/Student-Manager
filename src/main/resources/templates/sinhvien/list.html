@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout :: layout(~{::title}, ~{::div#page-content})}">
+<head>
+    <title>Danh sách sinh viên</title>
+</head>
+<body>
+<div id="page-content">
+    <h2>Danh sách sinh viên</h2>
+    <a th:href="@{/sinhvien/add}" class="btn btn-success mb-3">Thêm mới</a>
+    <table class="table table-bordered">
+        <thead class="table-light">
+            <tr>
+                <th>MSSV</th>
+                <th>Họ tên</th>
+                <th>Ngày sinh</th>
+                <th>Email</th>
+                <th>Lớp</th>
+                <th>Môn học</th>
+                <th>Chức năng</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="sv : ${dsSinhVien}">
+                <td th:text="${sv.mssv}"></td>
+                <td th:text="${sv.hoTen}"></td>
+                <td th:text="${#dates.format(sv.ngaySinh, 'dd/MM/yyyy')}"></td>
+                <td th:text="${sv.email}"></td>
+                <td th:text="${sv.lop != null ? sv.lop.tenLop : ''}"></td>
+                <td>
+                    <span th:if="${sv.monHocs != null && !sv.monHocs.isEmpty()}"
+                          th:text="${#strings.listJoin(sv.monHocs.![tenMonHoc], ', ')}"></span>
+                    <span th:if="${sv.monHocs == null || sv.monHocs.isEmpty()}">Chưa có</span>
+                </td>
+                <td>
+                    <a th:href="@{/sinhvien/edit/{id}(id=${sv.mssv})}">Sửa</a>
+                    |
+                    <a th:href="@{/sinhvien/delete/{id}(id=${sv.mssv})}"
+                       onclick="return confirm('Bạn có chắc muốn xoá?')">Xoá</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

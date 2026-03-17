@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout :: layout(~{::title}, ~{::div#page-content})}">
+<head>
+    <title>Dashboard - Quản trị viên</title>
+</head>
+<body>
+<div id="page-content">
+    <h2>Dashboard Quản trị</h2>
+    <hr/>
+
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card text-center bg-primary text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Tổng số Sinh viên</h5>
+                    <h2 th:text="${totalSinhVien}">0</h2>
+                </div>
+                <div class="card-footer">
+                    <a th:href="@{/sinhvien}" class="btn btn-light btn-sm">Quản lý</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center bg-info text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Tổng số Môn học</h5>
+                    <h2 th:text="${totalMonHoc}">0</h2>
+                </div>
+                <div class="card-footer">
+                    <a th:href="@{/monhoc}" class="btn btn-light btn-sm">Quản lý</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center bg-success text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Tổng số Lớp</h5>
+                    <h2 th:text="${totalLop}">0</h2>
+                </div>
+                <div class="card-footer">
+                    <a th:href="@{/lop}" class="btn btn-light btn-sm">Quản lý</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr/>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-warning">
+                    <h5>Quản lý dữ liệu</h5>
+                </div>
+                <div class="list-group list-group-flush">
+                    <a th:href="@{/sinhvien}" class="list-group-item list-group-item-action">📚 Quản lý Sinh viên</a>
+                    <a th:href="@{/lop}" class="list-group-item list-group-item-action">🏫 Quản lý Lớp</a>
+                    <a th:href="@{/monhoc}" class="list-group-item list-group-item-action">📖 Quản lý Môn học</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-warning">
+                    <h5>Quản lý hệ thống</h5>
+                </div>
+                <div class="list-group list-group-flush">
+                    <a th:href="@{/admin/accounts}" class="list-group-item list-group-item-action">👥 Quản lý Tài khoản & Quyền</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

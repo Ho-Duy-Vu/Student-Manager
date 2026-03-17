@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout :: layout(~{::title}, ~{::div#page-content})}">
+<head>
+    <title>Sửa tài khoản</title>
+</head>
+<body>
+<div id="page-content">
+    <h2>Sửa tài khoản</h2>
+    <form th:action="@{/admin/accounts/edit/{id}(id=${account.id})}" th:object="${account}" method="post" class="mt-3">
+        <div class="mb-3">
+            <label class="form-label">MSSV</label>
+            <input type="text" class="form-control" th:field="*{mssv}" readonly>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Họ tên</label>
+            <input type="text" class="form-control" th:field="*{hoTen}">
+            <div class="text-danger" th:if="${#fields.hasErrors('hoTen')}" th:errors="*{hoTen}"></div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Vai trò</label>
+            <select class="form-select" th:field="*{role}">
+                <option value="ROLE_USER">USER</option>
+                <option value="ROLE_ADMIN">ADMIN</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Cập nhật</button>
+        <a th:href="@{/admin/accounts}" class="btn btn-secondary">Quay lại</a>
+    </form>
+</div>
+</body>
+</html>
