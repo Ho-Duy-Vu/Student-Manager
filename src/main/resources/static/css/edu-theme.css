@@ -1,0 +1,303 @@
+:root {
+    --hutech-blue-900: #0a2a66;
+    --hutech-blue-700: #0f3f9c;
+    --hutech-blue-500: #1d5fd3;
+    --hutech-red-500: #d62839;
+    --hutech-gold-400: #f2b705;
+    --ink-900: #152238;
+    --ink-700: #384860;
+    --ink-100: #f3f6fb;
+    --surface: #ffffff;
+    --surface-soft: #f8fbff;
+    --border-soft: #d9e4f2;
+    --shadow-1: 0 12px 30px rgba(14, 31, 75, 0.1);
+    --shadow-2: 0 20px 48px rgba(8, 30, 87, 0.16);
+    --radius-xl: 18px;
+    --radius-lg: 12px;
+}
+
+html,
+body {
+    min-height: 100%;
+}
+
+body {
+    font-family: "Be Vietnam Pro", sans-serif;
+    color: var(--ink-900);
+    background:
+        radial-gradient(circle at 8% 8%, rgba(242, 183, 5, 0.16) 0, rgba(242, 183, 5, 0) 40%),
+        radial-gradient(circle at 95% 0%, rgba(214, 40, 57, 0.12) 0, rgba(214, 40, 57, 0) 38%),
+        linear-gradient(180deg, #eef4ff 0%, #f7faff 36%, #ffffff 100%);
+    background-attachment: fixed;
+}
+
+.edu-navbar {
+    background: linear-gradient(110deg, var(--hutech-blue-900) 0%, var(--hutech-blue-700) 48%, #0a367f 100%);
+    box-shadow: var(--shadow-1);
+    border-bottom: 3px solid rgba(242, 183, 5, 0.8);
+}
+
+.navbar-brand {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 800;
+    letter-spacing: 0.4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.brand-badge {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: linear-gradient(145deg, var(--hutech-gold-400), #ffd558);
+    color: #1f2430;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    box-shadow: 0 8px 20px rgba(242, 183, 5, 0.38);
+}
+
+.brand-subtitle {
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    color: rgba(255, 255, 255, 0.82);
+    display: block;
+    margin-top: -2px;
+}
+
+.navbar .nav-link {
+    color: rgba(255, 255, 255, 0.92) !important;
+    border-radius: 10px;
+    padding: 8px 12px !important;
+    margin-right: 4px;
+    transition: background-color 0.25s ease, transform 0.25s ease;
+}
+
+.navbar .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.17);
+    transform: translateY(-1px);
+}
+
+.page-frame {
+    padding-bottom: 24px;
+}
+
+#page-content {
+    background: var(--surface);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-1);
+    padding: 24px;
+    animation: riseIn 0.35s ease;
+}
+
+#page-content h2,
+#page-content h3 {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 800;
+    color: var(--hutech-blue-900);
+    margin-bottom: 18px;
+}
+
+.card {
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-1);
+    overflow: hidden;
+}
+
+.card-header {
+    border-bottom: none;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+}
+
+.table {
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.table thead th {
+    background-color: #103678 !important;
+    color: #fff;
+    border-color: #244e97;
+    font-weight: 700;
+}
+
+.table tbody tr:hover {
+    background-color: #f3f8ff;
+}
+
+.form-control,
+.form-select,
+textarea {
+    border-radius: 10px;
+    border-color: #c8d8ee;
+}
+
+.form-control:focus,
+.form-select:focus,
+textarea:focus {
+    box-shadow: 0 0 0 0.2rem rgba(29, 95, 211, 0.18);
+    border-color: #6d9ce7;
+}
+
+.btn {
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.btn-primary {
+    background: linear-gradient(120deg, #1d5fd3, #0f47ac);
+    border: none;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(120deg, #174dab, #0c3c95);
+}
+
+.btn-success {
+    background: linear-gradient(120deg, #14895f, #0f6e4d);
+    border: none;
+}
+
+.btn-outline-light:hover {
+    color: #0d3f9e;
+}
+
+.alert {
+    border: none;
+    border-radius: 12px;
+}
+
+.auth-page {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 28px 14px;
+}
+
+.auth-wrap {
+    width: min(980px, 100%);
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.86);
+    border: 1px solid rgba(205, 220, 242, 0.75);
+    box-shadow: var(--shadow-2);
+    backdrop-filter: blur(6px);
+    overflow: hidden;
+}
+
+.auth-grid {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+}
+
+.auth-brand {
+    padding: 44px 34px;
+    color: #fff;
+    background:
+        linear-gradient(135deg, rgba(9, 34, 88, 0.94), rgba(20, 70, 163, 0.9)),
+        radial-gradient(circle at 20% 20%, rgba(242, 183, 5, 0.4), rgba(242, 183, 5, 0) 45%);
+}
+
+.auth-brand h1 {
+    font-family: "Montserrat", sans-serif;
+    font-size: 30px;
+    font-weight: 900;
+    margin-bottom: 8px;
+}
+
+.auth-brand p {
+    opacity: 0.9;
+    line-height: 1.55;
+}
+
+.auth-form {
+    background: var(--surface);
+    padding: 36px 30px;
+}
+
+.auth-form h2 {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 800;
+    color: var(--hutech-blue-900);
+    margin-bottom: 4px;
+}
+
+.auth-form .sub {
+    color: var(--ink-700);
+    margin-bottom: 18px;
+}
+
+.metric-card {
+    border-radius: 16px;
+    color: #fff;
+    padding: 18px;
+    box-shadow: var(--shadow-1);
+    min-height: 160px;
+}
+
+.metric-blue {
+    background: linear-gradient(135deg, #1d5fd3 0%, #0f3f9c 100%);
+}
+
+.metric-cyan {
+    background: linear-gradient(135deg, #0f9bb0 0%, #0b7688 100%);
+}
+
+.metric-green {
+    background: linear-gradient(135deg, #138a62 0%, #0f6d4d 100%);
+}
+
+.metric-red {
+    background: linear-gradient(135deg, #d62839 0%, #ad1d2b 100%);
+}
+
+.metric-label {
+    font-size: 14px;
+    opacity: 0.9;
+    margin-bottom: 4px;
+}
+
+.metric-value {
+    font-family: "Montserrat", sans-serif;
+    font-size: 34px;
+    font-weight: 900;
+    line-height: 1.1;
+}
+
+.chart-card .card-body {
+    height: 320px;
+}
+
+.chart-canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+@keyframes riseIn {
+    from {
+        transform: translateY(6px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@media (max-width: 992px) {
+    .auth-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .auth-brand {
+        padding: 28px 24px;
+    }
+
+    #page-content {
+        padding: 16px;
+    }
+}

@@ -6,71 +6,174 @@
 </head>
 <body>
 <div id="page-content">
-    <h2>Dashboard Quản trị</h2>
-    <hr/>
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
+        <h2 class="mb-0">Dashboard Quản trị</h2>
+        <span class="badge text-bg-primary fs-6 px-3 py-2">Academic Analytics</span>
+    </div>
+    <p class="text-secondary mb-4">Tổng quan vận hành hệ thống quản lý sinh viên và môn học theo thời gian thực.</p>
 
-    <div class="row mb-4">
-        <div class="col-md-4">
-            <div class="card text-center bg-primary text-white">
-                <div class="card-body">
-                    <h5 class="card-title">Tổng số Sinh viên</h5>
-                    <h2 th:text="${totalSinhVien}">0</h2>
+    <div class="row g-3 mb-4">
+        <div class="col-12 col-md-6 col-xl-3">
+            <div class="metric-card metric-blue">
+                <div class="metric-label">Tổng Sinh viên</div>
+                <div class="metric-value" th:text="${totalSinhVien}">0</div>
+                <a th:href="@{/sinhvien}" class="btn btn-sm btn-outline-light mt-2">Quản lý</a>
+            </div>
+        </div>
+        <div class="col-12 col-md-6 col-xl-3">
+            <div class="metric-card metric-cyan">
+                <div class="metric-label">Tổng Môn học</div>
+                <div class="metric-value" th:text="${totalMonHoc}">0</div>
+                <a th:href="@{/monhoc}" class="btn btn-sm btn-outline-light mt-2">Quản lý</a>
+            </div>
+        </div>
+        <div class="col-12 col-md-6 col-xl-3">
+            <div class="metric-card metric-green">
+                <div class="metric-label">Tổng Lớp học</div>
+                <div class="metric-value" th:text="${totalLop}">0</div>
+                <a th:href="@{/lop}" class="btn btn-sm btn-outline-light mt-2">Quản lý</a>
+            </div>
+        </div>
+        <div class="col-12 col-md-6 col-xl-3">
+            <div class="metric-card metric-red">
+                <div class="metric-label">Tổng lượt đăng ký</div>
+                <div class="metric-value" th:text="${totalLuotDangKy}">0</div>
+                <a th:href="@{/courseregs}" class="btn btn-sm btn-outline-light mt-2">Theo dõi</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-3 mb-4">
+        <div class="col-12 col-xl-7">
+            <div class="card chart-card h-100">
+                <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Phân bổ sinh viên theo lớp</h5>
+                    <span class="small text-secondary">Bar Chart</span>
                 </div>
-                <div class="card-footer">
-                    <a th:href="@{/sinhvien}" class="btn btn-light btn-sm">Quản lý</a>
+                <div class="card-body">
+                    <canvas id="studentsByClassChart" class="chart-canvas"></canvas>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card text-center bg-info text-white">
+        <div class="col-12 col-xl-5">
+            <div class="card chart-card h-100">
+                <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Tỷ lệ sử dụng sức chứa môn học</h5>
+                    <span class="small text-secondary">Doughnut</span>
+                </div>
                 <div class="card-body">
-                    <h5 class="card-title">Tổng số Môn học</h5>
-                    <h2 th:text="${totalMonHoc}">0</h2>
-                </div>
-                <div class="card-footer">
-                    <a th:href="@{/monhoc}" class="btn btn-light btn-sm">Quản lý</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card text-center bg-success text-white">
-                <div class="card-body">
-                    <h5 class="card-title">Tổng số Lớp</h5>
-                    <h2 th:text="${totalLop}">0</h2>
-                </div>
-                <div class="card-footer">
-                    <a th:href="@{/lop}" class="btn btn-light btn-sm">Quản lý</a>
+                    <canvas id="capacityChart" class="chart-canvas"></canvas>
                 </div>
             </div>
         </div>
     </div>
 
-    <hr/>
-
-    <div class="row">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header bg-warning">
-                    <h5>Quản lý dữ liệu</h5>
+    <div class="row g-3">
+        <div class="col-12 col-xl-8">
+            <div class="card chart-card h-100">
+                <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Top môn học có đăng ký cao nhất</h5>
+                    <span class="small text-secondary">Horizontal Bar</span>
+                </div>
+                <div class="card-body">
+                    <canvas id="topCoursesChart" class="chart-canvas"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-xl-4">
+            <div class="card h-100">
+                <div class="card-header bg-white">
+                    <h5 class="mb-0">Điều hướng nhanh</h5>
                 </div>
                 <div class="list-group list-group-flush">
                     <a th:href="@{/sinhvien}" class="list-group-item list-group-item-action">📚 Quản lý Sinh viên</a>
                     <a th:href="@{/lop}" class="list-group-item list-group-item-action">🏫 Quản lý Lớp</a>
                     <a th:href="@{/monhoc}" class="list-group-item list-group-item-action">📖 Quản lý Môn học</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header bg-warning">
-                    <h5>Quản lý hệ thống</h5>
-                </div>
-                <div class="list-group list-group-flush">
                     <a th:href="@{/admin/accounts}" class="list-group-item list-group-item-action">👥 Quản lý Tài khoản & Quyền</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+<script th:inline="javascript">
+    const parsedClassLabels = /*[[${classLabels}]]*/ [];
+    const parsedClassData = /*[[${classData}]]*/ [];
+    const parsedTopCourseLabels = /*[[${topCourseLabels}]]*/ [];
+    const parsedTopCourseData = /*[[${topCourseData}]]*/ [];
+    const parsedCapacityData = /*[[${capacityData}]]*/ [];
+
+    new Chart(document.getElementById("studentsByClassChart"), {
+        type: "bar",
+        data: {
+            labels: parsedClassLabels,
+            datasets: [{
+                label: "Số sinh viên",
+                data: parsedClassData,
+                backgroundColor: "rgba(29, 95, 211, 0.75)",
+                borderColor: "rgba(15, 63, 156, 1)",
+                borderWidth: 1.5,
+                borderRadius: 8
+            }]
+        },
+        options: {
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: { precision: 0 }
+                }
+            }
+        }
+    });
+
+    new Chart(document.getElementById("capacityChart"), {
+        type: "doughnut",
+        data: {
+            labels: ["Đã đăng ký", "Còn trống"],
+            datasets: [{
+                data: parsedCapacityData,
+                backgroundColor: ["rgba(214, 40, 57, 0.85)", "rgba(14, 137, 95, 0.8)"],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { position: "bottom" }
+            }
+        }
+    });
+
+    new Chart(document.getElementById("topCoursesChart"), {
+        type: "bar",
+        data: {
+            labels: parsedTopCourseLabels,
+            datasets: [{
+                label: "Lượt đăng ký",
+                data: parsedTopCourseData,
+                backgroundColor: "rgba(15, 63, 156, 0.82)",
+                borderRadius: 8
+            }]
+        },
+        options: {
+            indexAxis: "y",
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    ticks: { precision: 0 }
+                }
+            }
+        }
+    });
+</script>
 </body>
 </html>

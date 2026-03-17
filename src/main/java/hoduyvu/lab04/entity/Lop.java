@@ -24,6 +24,6 @@ public class Lop {
     @Column(name = "TenLop", length = 7)
     private String tenLop;
 
-    @OneToMany(mappedBy = "lop", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "lop", fetch = FetchType.LAZY)
     private Set<SinhVien> sinhViens;
 }

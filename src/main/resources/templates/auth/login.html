@@ -4,50 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng nhập - HUTECH</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/edu-theme.css}">
 </head>
-<body class="bg-light">
-<div class="container d-flex justify-content-center align-items-center" style="min-height:100vh;">
-    <div class="card shadow" style="width: 400px;">
-        <div class="card-header bg-primary text-white text-center py-3">
-            <h4 class="mb-0">HUTECH &ndash; Đăng nhập</h4>
-        </div>
-        <div class="card-body p-4">
-
-            <div th:if="${param.error}" class="alert alert-danger">
-                MSSV hoặc mật khẩu không đúng. Vui lòng thử lại.
+<body>
+<section class="auth-page">
+    <div class="auth-wrap">
+        <div class="auth-grid">
+            <div class="auth-brand">
+                <h1>HUTECH</h1>
+                <p>Cổng thông tin học vụ dành cho sinh viên với trải nghiệm quản lý đăng ký môn học trực quan, hiện đại và bảo mật.</p>
             </div>
-            <div th:if="${param.logout}" class="alert alert-info">
-                Bạn đã đăng xuất thành công.
-            </div>
-            <div th:if="${param.registered}" class="alert alert-success">
-                Đăng ký thành công! Vui lòng đăng nhập.
-            </div>
+            <div class="auth-form">
+                <h2>Đăng nhập</h2>
+                <p class="sub">Sử dụng MSSV và mật khẩu để tiếp tục.</p>
 
-            <form th:action="@{/auth/login}" method="post">
-                <div class="mb-3">
-                    <label for="mssv" class="form-label fw-semibold">Mã số sinh viên</label>
-                    <input type="text" id="mssv" name="mssv" class="form-control"
-                           placeholder="Nhập MSSV (10 chữ số)" required autofocus>
+                <div th:if="${param.error}" class="alert alert-danger">
+                    MSSV hoặc mật khẩu không đúng. Vui lòng thử lại.
                 </div>
-                <div class="mb-3">
-                    <label for="matKhau" class="form-label fw-semibold">Mật khẩu</label>
-                    <input type="password" id="matKhau" name="matKhau" class="form-control"
-                           placeholder="Nhập mật khẩu" required>
+                <div th:if="${param.logout}" class="alert alert-info">
+                    Bạn đã đăng xuất thành công.
                 </div>
-                <div class="d-grid mt-3">
-                    <button type="submit" class="btn btn-primary">Đăng nhập</button>
+                <div th:if="${param.registered}" class="alert alert-success">
+                    Đăng ký thành công! Vui lòng đăng nhập.
                 </div>
-            </form>
 
-            <hr>
-            <div class="text-center">
-                Chưa có tài khoản?
-                <a th:href="@{/auth/register}">Đăng ký ngay</a>
+                <form th:action="@{/auth/login}" method="post">
+                    <div class="mb-3">
+                        <label for="mssv" class="form-label fw-semibold">Mã số sinh viên</label>
+                        <input type="text" id="mssv" name="mssv" class="form-control"
+                               placeholder="Nhập MSSV (10 chữ số)" required autofocus>
+                    </div>
+                    <div class="mb-3">
+                        <label for="matKhau" class="form-label fw-semibold">Mật khẩu</label>
+                        <input type="password" id="matKhau" name="matKhau" class="form-control"
+                               placeholder="Nhập mật khẩu" required>
+                    </div>
+                    <div class="d-grid mt-3">
+                        <button type="submit" class="btn btn-primary">Đăng nhập</button>
+                    </div>
+                </form>
+
+                <hr>
+                <div class="text-center">
+                    Chưa có tài khoản?
+                    <a th:href="@{/auth/register}">Đăng ký ngay</a>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</section>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
